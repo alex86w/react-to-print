@@ -34,18 +34,17 @@ class ReactToPrint extends React.Component {
     }, 500);
   }
 
-  triggerPrint = (target) => {
+  triggerPrint = async (target) => {
     const { onBeforePrint, onAfterPrint } = this.props;
 
     if (onBeforePrint) {
-      onBeforePrint();
+      await onBeforePrint();
     }
 
     setTimeout(() => {
       target.contentWindow.focus();
       target.contentWindow.print();
       this.removeWindow(target);
-
       if (onAfterPrint) {
         onAfterPrint();
       }
